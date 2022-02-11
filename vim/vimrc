@@ -1,0 +1,19 @@
+set encoding=utf-8
+set number
+set hidden
+set incsearch
+set hlsearch
+set smartcase
+set ignorecase
+set wildmenu
+set wildmode=longest:full,full
+set noswapfile
+set scrolloff=13
+set undofile
+set complete+=U
+
+let mapleader=','
+inoremap jk <Esc>
+noremap <unique> <leader>w :w<CR>
+
+colorscheme industry

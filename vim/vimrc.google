@@ -1,0 +1,49 @@
+set nocompatible
+filetype off    " Required
+
+set encoding=utf-8
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Bundle 'gmarik/vundle'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'junegunn/vim-pseudocl'
+Bundle 'junegunn/vim-oblique'
+Bundle 'rking/ag.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'easymotion/vim-easymotion'
+
+call vundle#end()
+
+source /usr/share/vim/google/google.vim
+filetype plugin indent on
+syntax on
+
+Glug youcompleteme-google
+Glug blaze plugin[mappings]='<leader>b'
+Glug blaze !fingerprinting
+Glug piper plugin[mappings]='<leader>p'
+Glug relatedfiles plugin[mappings]='<leader>r'
+Glug ultisnips-google
+
+noremap <leader>b :CtrlPBuffer<CR>
+noremap <leader>f :CtrlP expand('%:h')<CR>
+
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_clangd_binary_path = '/usr/bin/clangd --index-service=blade:fozzie'
+
+let g:ctrlp_extensions = ['line', 'dir']
+let g:ctrlp_user_command = {
+    \ 'types': {
+        \ 1: ['.hg', 'hg --cwd %s files'],
+        \ },
+    \ 'fallback': 'find %s -type f'
+    \ }
+
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsListSnippets = '<c-l>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
