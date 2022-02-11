@@ -1,0 +1,39 @@
+export PATH="/usr/local/google/home/antonm/.linuxbrew/bin:/usr/lib/google-golang/bin:/usr/local/buildtools/java/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/google/bin/releases/editor-devtools"
+
+source /etc/bash_completion.d/g4d
+source /etc/bash.bashrc.d/shell_history_forwarder.sh
+
+alias blaze='nocorrect blaze'
+alias rabbit='nocorrect rabbit'
+alias g4='nocorrect g4'
+alias fileutil='nocorrect noglob fileutil'
+alias lockserv='nocorrect noglob lockserv'
+
+alias t="blaze test '...'"
+alias tall='blaze test -- //privacy/data_governance/oracle/... -//privacy/data_governance/oracle/client/... -//privacy/data_governance/oracle/guitar/...; blaze test //privacy/data_governance/oracle/client/... ; blaze test //production/pod/realms/dg_oracle/projects/policy-service/... ; blaze test //production/borg/pod/dg-oracle/... ; blaze test //production/borg/dg-oracle-dev/...'
+
+fpath=($(realpath /google/src/files/head/depot/google3/devtools/blaze/scripts/zsh_completion) $fpath)
+
+alias mpmbbit='rabbit --verifiable mpm -c opt --copt=-gmlt --build_runfile_links'
+alias gpaste='/google/src/head/depot/eng/tools/pastebin'
+
+alias -g PDT='TZ=PST8PDT'
+
+hash -d ro=/google/data/ro/projects
+
+export P4DIFF=/google/data/ro/users/lo/lodato/git-multi-diff
+
+_fileutil() {
+  local state
+
+  _arguments \
+    '1:command:(ls rm du)' \
+    '*:paths:_history_complete_word' \
+    '--gfs_user=[user name]:user_name:(youtube-sessions-incremental youtube-sessions-grp)' \
+    '-l[long output]' \
+    '-h[humand readable]' \
+    '-R[recursive]' \
+    '-f[force]' \
+    '--sharded[sharded]'
+}
+compdef _fileutil fileutil
